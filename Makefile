@@ -4,6 +4,7 @@
 #   make verificar E=4     confere a Entrega 4 (e as anteriores)
 #   make verificar         confere as quatro
 #   make prova             roda a verificacao num CLONE LIMPO (o que a correcao faz)
+#   make teste-envio       analise preliminar do envio (os mesmos portoes da vitrine)
 #   make evidencias E=1    grava evidencias/verificacao-1.txt para entregar
 #   make exemplo           compila e roda um programa de exemplo
 #   make limpar            apaga os .mplb gerados
@@ -11,7 +12,7 @@
 PY := python3
 E  :=
 
-.PHONY: verificar prova evidencias exemplo limpar autoteste ajuda
+.PHONY: verificar prova evidencias exemplo limpar autoteste ajuda teste-envio
 
 ajuda:
 	@sed -n '/^# Trabalho/,/^$$/p' Makefile | sed 's/^# \{0,1\}//'
@@ -69,3 +70,9 @@ limpar:
 
 autoteste:
 	@./autoteste.sh
+
+# A analise preliminar do envio, a mesma que roda no pull request da vitrine.
+# A segunda analise (IA) roda sozinha no GitHub, pela acao "Teste de envio", a cada push.
+teste-envio:
+	@curl -fsSL https://raw.githubusercontent.com/LuizRMSilva1973/compiladores-mpl-2026-2/main/.github/scripts/pre_aceitacao.py -o .pre_aceitacao.py
+	@$(PY) .pre_aceitacao.py --publico --teste --pasta "$$(pwd)"; rc=$$?; rm -f .pre_aceitacao.py; exit $$rc

@@ -132,6 +132,24 @@ para ninguém perder tempo pelo caminho errado.
 
 ---
 
+## Testar o envio (antes da apresentação)
+
+O envio final é um pull request na vitrine
+[compiladores-mpl-2026-2](https://github.com/LuizRMSilva1973/compiladores-mpl-2026-2), depois da
+apresentação. Dá para **testar o envio agora**, no repositório do grupo, sem mostrar o código a ninguém:
+
+- **No GitHub:** a ação **Teste de envio** (`.github/workflows/teste-de-envio.yml`) roda a cada `git push`
+  no repositório de vocês. O resultado aparece na aba *Actions*.
+  1. **Análise preliminar** — os mesmos portões e o mesmo verificador do envio de verdade.
+  2. **Segunda análise (IA)** — só se a preliminar passar: um retorno técnico sobre o código
+     (organização, clareza, tratamento de erros), **uma vez por dia por grupo**. Não vale nota.
+- **Na máquina de vocês:** `make teste-envio` roda só a análise preliminar.
+
+Quem clonou antes de 26/10 traz a ação para o repositório do grupo com
+`git pull https://github.com/LuizRMSilva1973/compiladores-lab.git main`.
+
+---
+
 ## Como entregar
 
 1. `git push` no repositório do grupo.
